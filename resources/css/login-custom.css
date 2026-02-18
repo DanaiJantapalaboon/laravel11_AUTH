@@ -1,0 +1,48 @@
+input:hover {
+    background-color: var(--bg-input-hover);
+    transition: 0.5s;
+}
+
+.login-form {
+    .row {
+        .btn-submit {
+            background-color: var(--bg-button);
+            color: #fff;
+        }
+        .btn-submit:hover {
+            background-color: var(--bg-button-hover);
+            color: #fff;
+        }
+        .col-sm-6 {
+            .register {
+                a {
+                    text-decoration: none;
+                    font-weight: bold;
+                    color: red;
+                }
+                a:hover {
+                    font-style: italic;
+                }
+            }
+            .forgot-password {
+                a {
+                    text-decoration: none;
+                    color: var(--bg-button);
+                }
+                a:hover {
+                    font-style: italic;
+                    color: var(--bg-button);
+                }
+            }
+        }
+    }
+    .footer-wrapper {
+        background-color: var(--bg-menu);
+        a i:hover {
+            color: var(--bg-input-hover);
+        }
+        .icon {
+            color: #fff;
+        }
+    }
+}

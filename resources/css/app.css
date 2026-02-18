@@ -1,0 +1,12 @@
+:root {
+    --bg-menu: rgb(42, 69, 78);
+    --bg-button: rgb(0, 156, 133);
+    --bg-background: rgb(225, 225, 225);
+    --bg-input-hover: #C1F1FF;
+    --bg-button-hover: rgb(1, 112, 95);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

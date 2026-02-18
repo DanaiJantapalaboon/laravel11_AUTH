@@ -1,0 +1,10 @@
+.app-container {
+    background-color: var(--bg-background) !important;
+}
+.button-link {
+    text-decoration: none !important;
+}
+input:hover {
+    background-color: var(--bg-input-hover);
+    transition: 0.5s;
+}
