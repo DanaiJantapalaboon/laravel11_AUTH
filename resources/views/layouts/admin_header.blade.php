@@ -538,7 +538,7 @@
                                             <div class="grid-menu grid-menu-2col">
                                                 <div class="no-gutters row">
                                                     <div class="col-sm-6">
-                                                        <a href="" class="button-link">
+                                                        <a href="/account" class="button-link">
                                                             <button class="btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-warning">
                                                                 <i class="lnr-user icon-gradient bg-amy-crisp btn-icon-wrapper mb-2"></i> บัญชีของฉัน
                                                             </button>

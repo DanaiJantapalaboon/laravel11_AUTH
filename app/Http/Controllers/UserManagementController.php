@@ -12,7 +12,13 @@ class UserManagementController extends Controller
 {
     
 
-    public function add_user(Request $request): RedirectResponse
+    public function index() {
+        $users = User::select('userID', 'name', 'position', 'email', 'created_at')->get();
+        return view('admin.user_management', compact('users'));
+    }
+
+
+    public function user_add(Request $request): RedirectResponse
     {
         try {
             $validated = $request->validate([
@@ -31,10 +37,28 @@ class UserManagementController extends Controller
         return back();
     }
 
-    public function index() {
-        $users = User::all();
-        return view('admin.user_management', compact('users'));
+
+    public function user_edit(string $id)
+    {       
+        $user_edit = User::find($id);
+        return view('admin.user_management_edit', compact('user_edit'));
     }
+
+    
+    public function user_edit_save(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'position' => 'required|string|max:50'
+        ]);
+
+       $user_edit_save = User::findOrFail($id);
+       $user_edit_save->position = $request->input('position');
+       $user_edit_save->save();
+
+       return back()->with('success', 'ปรับปรุงข้อมูลสำเร็จ');
+    }
+
+
 }
 
 

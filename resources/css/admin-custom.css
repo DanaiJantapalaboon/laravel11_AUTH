@@ -8,3 +8,71 @@ input:hover {
     background-color: var(--bg-input-hover);
     transition: 0.5s;
 }
+.css-serial {
+    counter-reset: serial-number;
+}
+.css-serial td:first-child:before {
+    counter-increment: serial-number;
+    content: counter(serial-number);
+}
+
+
+/* CUSTOM MODAL, DO NOT DELETE */
+.pure-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.pure-modal.active {
+    display: flex;
+}
+.pure-modal-dialog {
+    background: #fff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    animation: modalFade 0.2s ease;
+}
+.pure-modal-header,
+.pure-modal-footer {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+.pure-modal-footer {
+    border-top: 1px solid #dee2e6;
+    border-bottom: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.pure-modal-title {
+    margin: 0;
+}
+.pure-modal-body {
+    padding: 1rem;
+}
+.pure-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+@keyframes modalFade {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@media (max-width: 576px) {
+    .pure-modal-dialog {
+        margin: 1rem;
+    }
+}
+/* END OF CUSTOM MODAL, DO NOT DELETE */

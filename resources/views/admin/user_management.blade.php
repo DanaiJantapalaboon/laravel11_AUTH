@@ -21,12 +21,9 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">ข้อมูลส่วนตัว</h5>
-                        <form class="" action="/submit_addaccount" method="POST">
+                        <form action="/submit_addaccount" method="POST">
                             @method('PUT')
                             @csrf
-                            {{-- @error('success')
-                                <p class="alert alert-success">{{ $message }}</p>
-                            @enderror --}}
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <div class="position-relative">
@@ -85,24 +82,26 @@
                             <div class="col-md-12">
                                 <div class="position-relative">
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover display compact" id="myTable">
+                                        <table class="table table-striped table-hover css-serial display compact" id="myTable">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">ชื่อ-สกุล</th>
-                                                <th scope="col">ตำแหน่ง</th>
-                                                <th scope="col">อีเมลล์</th>
-                                                <th class="dt-center" scope="col">Timestamp</th>
+                                                    <th class="dt-center" scope="col">#</th>
+                                                    <th scope="col">ชื่อ-สกุล</th>
+                                                    <th scope="col">ตำแหน่ง</th>
+                                                    <th scope="col">อีเมลล์</th>
+                                                    <th class="dt-center" scope="col">วันที่สร้าง Account</th>
+                                                    <th class="dt-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-group-divider">
                                                 @foreach ($users as $user)
                                                 <tr>
-                                                    <th scope="row">1</th>
+                                                    <td class="text-center"></td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->position }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td class="dt-center">{{ $user->created_at }}</td>
+                                                    <td class="dt-center"><a href="{{ route('user_management_edit', $user->userID) }}" class="btn btn-sm btn-secondary">แก้ไข</a></td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

@@ -45,4 +45,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // custom primary_key for $id
+    protected $primaryKey = 'userID';
 }

@@ -29,6 +29,7 @@
                 @yield('account-content')
                 @yield('company-content')
                 @yield('user_management-content')
+                @yield('user_management_edit-content')
                 <div class="app-wrapper-footer">
                     @include('layouts.admin_footer')
                 </div>
