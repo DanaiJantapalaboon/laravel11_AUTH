@@ -7,6 +7,9 @@
         <form action="">
             <h2 class="text-center fw-semibold">เข้าสู่ระบบ</h2>
             <h6 class="text-center">โปรแกรม่าสฟห่ดสาฟหก่ดวสา</h6>
+            @session('success')
+                <p class="alert alert-success p-1 small text-center">{{ $value }}</p>
+            @endsession
             <hr class="mb-5">
             <label for="email" class="form-label">อีเมลล์ <span style="color: red;">*</span></label>
             <input type="email" class="form-control mb-3" name="email" id="email" placeholder="..." maxlength="30" required>

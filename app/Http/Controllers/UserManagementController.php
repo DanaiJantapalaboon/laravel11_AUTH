@@ -25,7 +25,7 @@ class UserManagementController extends Controller
                 'email' => 'required|email|max:50',
                 'name' => 'required|string|max:50',
                 'position' => 'required|string|max:50',
-                'password' => ['required', 'confirmed', Password::min(8)->max(20)]
+                'password' => ['nullable', 'confirmed', Password::min(8)->max(20)]
             ]);
 
             User::create($validated);
@@ -40,7 +40,7 @@ class UserManagementController extends Controller
 
     public function user_edit(string $id)
     {       
-        $user_edit = User::find($id);
+        $user_edit = User::withTrashed()->findOrFail($id);
         return view('admin.user_management_edit', compact('user_edit'));
     }
 
@@ -59,36 +59,21 @@ class UserManagementController extends Controller
     }
 
 
+    public function user_disabled_save(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'email' => 'required|email|max:50'
+        ]);
+
+        $user_disabled_save = User::where('email', $request->input('email'))->where('userID', $id)->first();
+
+        if ($user_disabled_save) {
+            $user_disabled_save->delete();
+           return redirect()->route('user_management')->with('success', 'ผู้ใช้งานอีเมลล์ ' . $request->email . ' นี้ได้ปิดการใช้งานเรียบร้อยแล้ว');
+        } else {
+            return back()->withErrors(['error'=> 'ระงับบัญชีผู้ใช้ไม่สำเร็จ เนื่องจากกรอกอีเมลล์ผิด กรุณาตรวจสอบอีกครั้ง']);
+        }
+    }
+
+
 }
-
-
-
-
-// use Illuminate\Support\Facades\Hash;
-// use Illuminate\Validation\ValidationException;
-
-
-// public function updatePassword(Request $request)
-// {
-//     // 1. Validate the form inputs (new password, confirmation, etc.)
-//     $request->validate([
-//         'current_password' => 'required',
-//         'new_password' => 'required|min:8|confirmed',
-//     ]);
-
-//     // 2. Manually check if the 'current_password' input matches the stored password
-//     if (!Hash::check($request->current_password, auth()->user()->password)) {
-//         // If it doesn't match, manually add an error to the error bag
-//         throw ValidationException::withMessages([
-//             'current_password' => ['The current password field is incorrect.'],
-//         ]);
-//     }
-
-//     // 3. If the current password is correct, update the password
-//     $request->user()->update([
-//         'password' => Hash::make($request->new_password),
-//     ]);
-
-//     // Redirect with success message
-//     return back()->with('status', 'Password updated successfully!');
-// }

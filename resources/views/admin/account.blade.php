@@ -157,7 +157,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="position-relative">
+                                    <div class="position-relative text-center">
+                                        <img width="180" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
                                     </div>
                                 </div>
                             </div>

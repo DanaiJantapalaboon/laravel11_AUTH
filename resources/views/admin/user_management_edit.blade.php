@@ -24,6 +24,9 @@
                 @session('success')
                     <p class="alert alert-success">{{ $value }}</p>
                 @endsession
+                @error('error')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
@@ -103,17 +106,16 @@
                 <h5 class="pure-modal-title text-white">ระงับบัญชีผู้ใช้</h5>
                 <button class="pure-modal-close text-white" onclick="closeModal('accountModal')">&times;</button>
             </div>
-            <form action="{{ route('submit_editaccount', $user_edit->userID) }}" method="POST">
+            <form action="{{ route('submit_disabledaccount', $user_edit->userID) }}" method="POST">
                 <div class="pure-modal-body">
                     @method('PATCH')
                     @csrf
-                    {{-- <input type="hidden" id="edit_id"> --}}
                     <label for="email" class="form-label">กรุณากรอกอีเมลล์ของบัญชีนี้ให้ถูกต้องเพื่อยืนยันการระงับบัญชีผู้ใช้ และกดบันทึก <span class="text-danger"> *</span></label>
                     <input type="email" name="email" id="email" placeholder="..." class="form-control" maxlength="50" required>
                 </div>
                 <div class="pure-modal-footer">
-                    <button class="btn btn-secondary" onclick="closeModal('accountModal')">ยกเลิก</button>
-                    <button type="submit" class="btn btn-danger">บันทึก</button>
+                    <button class="btn btn-outline-secondary" onclick="closeModal('accountModal')">ยกเลิก</button>
+                    <button type="submit" class="btn btn-danger">ระงับบัญชีผู้ใช้</button>
                 </div>
             </form>
         </div>

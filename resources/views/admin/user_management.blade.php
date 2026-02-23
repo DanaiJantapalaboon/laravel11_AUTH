@@ -18,6 +18,9 @@
         </div>
         <div class="tab-content">
             <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                @session('success')
+                    <p class="alert alert-success">{{ $value }}</p>
+                @endsession
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">ข้อมูลส่วนตัว</h5>
@@ -29,9 +32,9 @@
                                     <div class="position-relative">
                                         <label for="email" class="form-label">อีเมลล์ (ใช้สำหรับเข้าสู่ระบบ) <span class="text-danger"> *</span></label>
                                         <input type="email" name="email" id="email" placeholder="..." class="form-control @error('error') is-invalid @enderror" maxlength="50" required>
-                                            @error('error')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                        @error('error')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -56,15 +59,15 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="password" class="form-label">รหัสผ่าน <span class="text-danger"> *</span></label>
-                                        <input type="password" name="password" id="password" placeholder="..." class="form-control" minlength="8" maxlength="20" required>
+                                        <label for="password" class="form-label">รหัสผ่าน</label>
+                                        <input type="password" name="password" id="password" placeholder="..." class="form-control" minlength="8" maxlength="20">
                                         <small class="text-muted"><i>รหัสผ่านความยาวไม่น้อยกว่า 8 ตัวอักษร และไม่เกิน 20 ตัวอักษร</i></small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="password_confirmation" class="form-label">ยืนยันรหัสผ่าน <span class="text-danger"> *</span></label>
-                                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="..." class="form-control @error('password') is-invalid @enderror" minlength="8" maxlength="20" required>
+                                        <label for="password_confirmation" class="form-label">ยืนยันรหัสผ่าน</label>
+                                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="..." class="form-control @error('password') is-invalid @enderror" minlength="8" maxlength="20">
                                         @error('password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
