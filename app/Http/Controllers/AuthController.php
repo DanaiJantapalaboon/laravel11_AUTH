@@ -4,11 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
+
 class AuthController extends Controller
 {
+
+    public function authenticate(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email|max:50',
+            'password' => ['required', Password::min(8)->max(20)]
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('/user_management');
+        }
+ 
+        return back()->withErrors(['error' => 'ไม่พบอีเมลล์ในระบบหรือกรอกรหัสผ่านผิดพลาด กรุณาตรวจสอบอีกครั้ง']);
+    }
+
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
+    }
+
+
+
+
 
 
     public function forgot_password(Request $request)
@@ -17,11 +50,12 @@ class AuthController extends Controller
             'email' => 'required|email|max:50'
         ]);
 
-        $check_email = User::where('email', $request->input('email'))->first();
+        $check_email = User::where('email', $request->input('email'))->select('email', 'userID')->first();
+
         if ($check_email) {
             return back()->with('reset_password_session', $check_email);
         } else {
-            return back()->withErrors(['error' => 'ไม่พบอีเมลล์ในระบบ กรุณาตรวจสอบอีกครั้งหรือติดต่อแอดมิน']);
+            return back()->withErrors(['error' => 'ไม่พบอีเมลล์ในระบบ กรุณาตรวจสอบอีกครั้งหรือติดต่อแอดมิน'])->onlyInput('email');
         }
     }
 

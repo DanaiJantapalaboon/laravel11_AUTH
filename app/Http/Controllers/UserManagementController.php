@@ -21,14 +21,14 @@ class UserManagementController extends Controller
     public function user_add(Request $request): RedirectResponse
     {
         try {
-            $validated = $request->validate([
+            $credentials = $request->validate([
                 'email' => 'required|email|max:50',
                 'name' => 'required|string|max:50',
                 'position' => 'required|string|max:50',
                 'password' => ['nullable', 'confirmed', Password::min(8)->max(20)]
             ]);
 
-            User::create($validated);
+            User::create($credentials);
 
         } catch(QueryException) {
             return back()->withErrors(['error' => 'อีเมลล์ซ้ำ กรุณากรอกใหม่']);

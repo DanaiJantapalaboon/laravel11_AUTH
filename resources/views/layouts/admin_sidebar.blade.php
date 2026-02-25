@@ -68,7 +68,10 @@
                 <li>
                     <a href="widgets-chart-boxes.html"><i class="metismenu-icon lnr-cog"></i>ข้อมูลทั่วไป</a>
                     <a href="widgets-chart-boxes.html" class="mm-active"><i class="metismenu-icon lnr-users"></i>ผู้ใช้งานระบบ</a>
-                    <a href="widgets-chart-boxes.html"><i class="metismenu-icon lnr-exit"></i>Logout</a>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="metismenu-icon lnr-exit"></i>Logout</a>
+                    <form action="/logout" method="POST" id="logout-form">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>

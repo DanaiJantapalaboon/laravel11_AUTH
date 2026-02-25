@@ -114,7 +114,7 @@
                     <input type="email" name="email" id="email" placeholder="..." class="form-control" maxlength="50" required>
                 </div>
                 <div class="pure-modal-footer">
-                    <button class="btn btn-outline-secondary" onclick="closeModal('accountModal')">ยกเลิก</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModal('accountModal')">ยกเลิก</button>
                     <button type="submit" class="btn btn-danger">ระงับบัญชีผู้ใช้</button>
                 </div>
             </form>
