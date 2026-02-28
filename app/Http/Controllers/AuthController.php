@@ -44,7 +44,7 @@ class AuthController extends Controller
 
 
 
-    public function forgot_password(Request $request)
+    public function forgot_password_check(Request $request)
     {
         $request->validate([
             'email' => 'required|email|max:50'
@@ -62,11 +62,11 @@ class AuthController extends Controller
 
     public function reset_password_save(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $credentials = Validator::make($request->all(), [
             'password' => ['required', 'confirmed', Password::min(8)->max(20)],
         ]);
 
-        if ($validator->fails()) {
+        if ($credentials->fails()) {
             return back()->withErrors(['error' => 'รหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง']);
         } else {
             $user_password_save = User::findOrFail($id);

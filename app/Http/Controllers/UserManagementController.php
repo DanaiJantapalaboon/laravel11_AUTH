@@ -69,7 +69,7 @@ class UserManagementController extends Controller
 
         if ($user_disabled_save) {
             $user_disabled_save->delete();
-           return redirect()->route('user_management')->with('success', 'ผู้ใช้งานอีเมลล์ ' . $request->email . ' นี้ได้ปิดการใช้งานเรียบร้อยแล้ว');
+            return redirect()->route('user_management')->with('success', 'ผู้ใช้งานอีเมลล์ ' . $request->email . ' นี้ได้ปิดการใช้งานเรียบร้อยแล้ว');
         } else {
             return back()->withErrors(['error'=> 'ระงับบัญชีผู้ใช้ไม่สำเร็จ เนื่องจากกรอกอีเมลล์ผิด กรุณาตรวจสอบอีกครั้ง']);
         }

@@ -56,29 +56,36 @@
         </div>
         <div class="tab-content">
             <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                @session('success')
+                    <p class="alert alert-success">{{ $value }}</p>
+                @endsession
+                @error('error')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">ข้อมูลส่วนตัว</h5>
-                        <form class="">
+                        <form action="change_info.submit" method="POST">
                             @csrf
+                            @method('PATCH')
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="email" class="form-label">อีเมลล์ (ใช้สำหรับเข้าสู่ระบบ) <span class="text-danger"> *</span></label>
-                                        <input type="email" name="email" id="email" placeholder="..." class="form-control" maxlength="50" required>
+                                        <label for="email" class="form-label">อีเมลล์ (ใช้สำหรับเข้าสู่ระบบ)</label>
+                                        <input type="email" id="email" placeholder="..." class="form-control" maxlength="50" value="{{ Auth::user()->email }}" readonly disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
                                         <label for="name" class="form-label">ชื่อ-สกุล <span class="text-danger"> *</span></label>
-                                        <input type="text" name="name" id="name" placeholder="..." class="form-control" maxlength="50" required>
+                                        <input type="text" name="name" id="name" placeholder="..." class="form-control" maxlength="50" value="{{ Auth::user()->name }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
                                         <label for="position" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
                                         <select name="position" id="position" placeholder="..." class="form-control" required>
-                                            <option value="" selected disabled>...</option>
+                                            <option value="{{ Auth::user()->position }}" selected disabled>{{ Auth::user()->position }}</option>
                                             <option value="ตำแหน่ง 1">ตำแหน่ง 1</option>
                                             <option value="ตำแหน่ง 2">ตำแหน่ง 2</option>
                                             <option value="ตำแหน่ง 3">ตำแหน่ง 3</option>
@@ -92,56 +99,65 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="resetpassword_question" class="form-label">คำถาม</label>
-                                        <input type="text" name="resetpassword_question" id="resetpassword_question" placeholder="..." class="form-control" maxlength="100">
+                                        <label for="forget_password_question" class="form-label">คำถาม<span class="text-danger"> *</span></label>
+                                        <input type="text" name="forget_password_question" id="forget_password_question" placeholder="..." value="{{ Auth::user()->forget_password_question }}" class="form-control" maxlength="100" required>
                                         <small class="text-muted"><i>ระบบจะแสดงคำถามนี้ เมื่อท่านต้องการรีเซ็ตรหัสผ่าน</i></small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="resetpassword_answer" class="form-label">คำตอบ</label>
-                                        <input type="text" name="resetpassword_answer" id="resetpassword_answer" placeholder="..." class="form-control" maxlength="100">
+                                        <label for="forget_password_answer" class="form-label">คำตอบ<span class="text-danger"> *</span></label>
+                                        <input type="text" name="forget_password_answer" id="forget_password_answer" placeholder="..." value="{{ Auth::user()->forget_password_answer }}" class="form-control" maxlength="100" required>
                                         <small class="text-muted"><i>ท่านจะต้องกรอกให้ถูกต้องเมื่อรีเซ็ตรหัสผ่าน</i></small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="resetpassword_hint" class="form-label">คำใบ้</label>
-                                        <input type="text" name="resetpassword_hint" id="resetpassword_hint" placeholder="..." class="form-control" maxlength="100">
+                                        <label for="forget_password_hint" class="form-label">คำใบ้<span class="text-danger"> *</span></label>
+                                        <input type="text" name="forget_password_hint" id="forget_password_hint" placeholder="..." value="{{ Auth::user()->forget_password_hint }}" class="form-control" maxlength="100" required>
                                         <small class="text-muted"><i>ระบบจะแสดงคำใบ้สำหรับคำตอบของท่าน</i></small>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="submit_generalinfo" class="mt-2 btn btn-primary">บันทึก</button>
+                            <button type="submit" class="mt-2 btn btn-primary">บันทึก</button>
+                            <button type="button" class="mt-2 btn btn-warning" onclick="openModal()">แก้ไขอีเมลล์</button>
                         </form>
                     </div>
                 </div>
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">เปลี่ยนรหัสผ่าน</h5>
-                        <form class="">
+                        <form action="change_password.submit" method="POST">
+                            @csrf
+                            @method('PATCH')
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="password_current" class="form-label">รหัสผ่านปัจจุบัน <span class="text-danger"> *</span></label>
-                                        <input type="password" name="password_current" id="password_current" placeholder="..." class="form-control" minlength="8" maxlength="20" required>
+                                        <label for="current_password" class="form-label">รหัสผ่านปัจจุบัน <span class="text-danger"> *</span></label>
+                                        <input type="password" name="current_password" id="current_password" placeholder="..." class="form-control @error('current_password') is-invalid @enderror" minlength="8" maxlength="20" required>
+                                        @error('current_password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="password_new" class="form-label">รหัสผ่านใหม่ <span class="text-danger"> *</span></label>
-                                        <input type="password" name="password_new" id="password_new" placeholder="..." class="form-control" minlength="8" maxlength="20" required>
+                                        <label for="password" class="form-label">รหัสผ่านใหม่ <span class="text-danger"> *</span></label>
+                                        <input type="password" name="password" id="password" placeholder="..." class="form-control" minlength="8" maxlength="20" required>
                                         <small class="text-muted"><i>รหัสผ่านความยาวไม่น้อยกว่า 8 ตัวอักษร และไม่เกิน 20 ตัวอักษร</i></small>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="password_confirm" class="form-label">ยืนยันรหัสผ่านใหม่ <span class="text-danger"> *</span></label>
-                                        <input type="password" name="password_confirm" id="password_confirm" placeholder="..." class="form-control" minlength="8" maxlength="20" required>
+                                        <label for="password_confirmation" class="form-label">ยืนยันรหัสผ่านใหม่ <span class="text-danger"> *</span></label>
+                                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="..." class="form-control @error('confirm_password') is-invalid @enderror" minlength="8" maxlength="20" required>
+                                        @error('confirm_password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="submit_newpassword" class="mt-2 btn btn-primary">บันทึก</button>
+                            <button type="submit" class="mt-2 btn btn-primary">บันทึก</button>
                         </form>
                     </div>
                 </div>
@@ -169,4 +185,41 @@
             </div>
         </div>
     </div>
+    <div class="pure-modal" id="emailModal">
+        <div class="pure-modal-dialog">
+            <div class="pure-modal-header d-flex justify-content-between align-items-center bg-warning">
+                <h5 class="pure-modal-title">แก้ไขอีเมลล์</h5>
+                <button class="pure-modal-close" onclick="closeModal('emailModal')">&times;</button>
+            </div>
+            <form action="change_email.submit" method="POST">
+                <div class="pure-modal-body">
+                    @csrf
+                    @method('PATCH')
+                    <label for="email_old" class="form-label">อีเมลล์เดิม</label>
+                    <input type="email" id="email_old" value="{{ Auth::user()->email }}" class="form-control mb-3" readonly disabled>
+                    <label for="email" class="form-label">อีเมลล์ใหม่ (ใช้สำหรับเข้าสู่ระบบ) <span class="text-danger"> *</span></label>
+                    <input type="email" name="email" id="email" placeholder="..." class="form-control" maxlength="50" required>
+                </div>
+                <div class="pure-modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModal('emailModal')">ยกเลิก</button>
+                    <button type="submit" class="btn btn-warning">แก้ไขอีเมลล์</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
+
+<script>
+    function openModal() {
+        document.getElementById('emailModal').classList.add('active');
+    }
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            document.querySelectorAll('.pure-modal.active')
+                .forEach(modal => modal.classList.remove('active'));
+        }
+    });
+</script>

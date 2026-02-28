@@ -4,7 +4,7 @@
 
 @section('main-content')
     <div class="col-sm-6">
-        <form action="{{ route('forgot_password.submit') }}" method="POST">
+        <form action="forgot_password.check" method="POST">
             @csrf
             <h2 class="text-center fw-semibold">ลืมรหัสผ่าน</h2>
             <h6 class="text-center">โปรแกรม่าสฟห่ดสาฟหก่ดวสา</h6>

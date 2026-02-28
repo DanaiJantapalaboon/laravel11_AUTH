@@ -491,8 +491,8 @@
                                                                     <img width="42" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
                                                                 </div>
                                                                 <div class="widget-content-left">
-                                                                    <div class="widget-heading">Alina Mcloughlin</div>
-                                                                    <div class="widget-subheading opacity-8">A short profile description</div>
+                                                                    <div class="widget-heading">{{ Auth::user()->name }}</div>
+                                                                    <div class="widget-subheading opacity-8">{{ Auth::user()->position }}</div>
                                                                 </div>
                                                                 <div class="widget-content-right mr-2">
                                                                     <a href="#" class="btn-pill btn-shadow btn-shine btn btn-focus" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -566,8 +566,8 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading"> Alina Mclourd </div>
-                                    <div class="widget-subheading"> VP People Manager </div>
+                                    <div class="widget-heading"> {{ Auth::user()->name }} </div>
+                                    <div class="widget-subheading"> {{ Auth::user()->position }} </div>
                                 </div>
                             </div>
                         </div>

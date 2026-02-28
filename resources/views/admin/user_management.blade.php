@@ -24,7 +24,7 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">ข้อมูลส่วนตัว</h5>
-                        <form action="/submit_addaccount" method="POST">
+                        <form action="add_account.submit" method="POST">
                             @method('PUT')
                             @csrf
                             <div class="row mb-3">

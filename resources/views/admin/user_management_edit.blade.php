@@ -33,7 +33,7 @@
                             <h5 class="card-title text-primary">ข้อมูลส่วนตัว</h5>
                             <h5 class="card-title text-success">Account Status : Active</h5>
                         </div>
-                        <form action="{{ route('submit_editaccount', $user_edit->userID) }}" method="POST">
+                        <form action="{{ route('edit_account.submit', $user_edit->userID) }}" method="POST">
                             @method('PATCH')
                             @csrf
                             <div class="row mt-4">
@@ -106,7 +106,7 @@
                 <h5 class="pure-modal-title text-white">ระงับบัญชีผู้ใช้</h5>
                 <button class="pure-modal-close text-white" onclick="closeModal('accountModal')">&times;</button>
             </div>
-            <form action="{{ route('submit_disabledaccount', $user_edit->userID) }}" method="POST">
+            <form action="{{ route('disabled_account.submit', $user_edit->userID) }}" method="POST">
                 <div class="pure-modal-body">
                     @method('PATCH')
                     @csrf

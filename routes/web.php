@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\UserManagementController;
 
 
@@ -10,17 +11,24 @@ Route::post('/authenticate', [AuthController::class, 'authenticate']);
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/forgot_password', 'forgot_password')->name('forgot_password.submit');
+    Route::post('/forgot_password.check', 'forgot_password_check');
     Route::post('/logout', 'logout')->middleware('auth');
 });
 
 
+Route::controller(MyAccountController::class)->group(function () {
+    Route::patch('/change_info.submit', 'change_info_save');
+    Route::patch('/change_email.submit', 'change_email_save');
+    Route::patch('/change_password.submit', 'change_password_save');
+});
+
+
 Route::controller(UserManagementController::class)->group(function () {
-    Route::put('/submit_addaccount', 'user_add');
+    Route::put('/add_account.submit', 'user_add');
     Route::get('/user_management', 'index')->name('user_management')->middleware('auth');
     Route::get('/user_management_edit/{id}', 'user_edit')->name('user_management_edit')->middleware('auth');
-    Route::patch('/submit_editaccount/{id}', 'user_edit_save')->name('submit_editaccount');
-    Route::patch('/submit_disabledaccount/{id}', 'user_disabled_save')->name('submit_disabledaccount');
+    Route::patch('/edit_account.submit/{id}', 'user_edit_save')->name('edit_account.submit');
+    Route::patch('/disabled_account.submit/{id}', 'user_disabled_save')->name('disabled_account.submit');
 });
 
 
