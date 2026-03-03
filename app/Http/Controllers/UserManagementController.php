@@ -47,12 +47,12 @@ class UserManagementController extends Controller
     
     public function user_edit_save(Request $request, $id): RedirectResponse
     {
-        $request->validate([
+        $credentials = $request->validate([
             'position' => 'required|string|max:50'
         ]);
 
        $user_edit_save = User::findOrFail($id);
-       $user_edit_save->position = $request->input('position');
+       $user_edit_save->position = $credentials['position'];
        $user_edit_save->save();
 
        return back()->with('success', 'ปรับปรุงข้อมูลสำเร็จ');
@@ -61,11 +61,11 @@ class UserManagementController extends Controller
 
     public function user_disabled_save(Request $request, $id): RedirectResponse
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email|max:50'
         ]);
 
-        $user_disabled_save = User::where('email', $request->input('email'))->where('userID', $id)->first();
+        $user_disabled_save = User::where('email', $credentials['email'])->where('userID', $id)->first();
 
         if ($user_disabled_save) {
             $user_disabled_save->delete();

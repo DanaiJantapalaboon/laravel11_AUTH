@@ -85,7 +85,7 @@
                                     <div class="position-relative">
                                         <label for="position" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
                                         <select name="position" id="position" placeholder="..." class="form-control" required>
-                                            <option value="{{ Auth::user()->position }}" selected disabled>{{ Auth::user()->position }}</option>
+                                            <option value="{{ Auth::user()->position }}" selected>{{ Auth::user()->position }}</option>
                                             <option value="ตำแหน่ง 1">ตำแหน่ง 1</option>
                                             <option value="ตำแหน่ง 2">ตำแหน่ง 2</option>
                                             <option value="ตำแหน่ง 3">ตำแหน่ง 3</option>

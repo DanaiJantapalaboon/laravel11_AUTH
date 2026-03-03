@@ -6,13 +6,12 @@ use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\UserManagementController;
 
 
-Route::patch('/submit_resetpassword/{id}', [AuthController::class, 'reset_password_save'])->name('submit_resetpassword');
-Route::post('/authenticate', [AuthController::class, 'authenticate']);
-
-
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/forgot_password.check', 'forgot_password_check');
+    Route::post('/authenticate', 'authenticate');
     Route::post('/logout', 'logout')->middleware('auth');
+    Route::post('/forgot_password.check', 'forgot_password_check');
+    Route::patch('/submit_reset_password/{id}', 'reset_password_save')->name('submit_reset_password');
+    Route::post('/submit_reset_password.check/{id}','reset_password_check')->name('submit_reset_password.check');
 });
 
 

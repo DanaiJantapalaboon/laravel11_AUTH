@@ -30,6 +30,7 @@ class AuthController extends Controller
     }
 
 
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
@@ -41,29 +42,43 @@ class AuthController extends Controller
 
 
 
-
-
-
     public function forgot_password_check(Request $request)
     {
         $request->validate([
             'email' => 'required|email|max:50'
         ]);
 
-        $check_email = User::where('email', $request->input('email'))->select('email', 'userID')->first();
+        $check_email = User::where('email', $request->input('email'))->select('email', 'userID', 'forget_password_question', 'forget_password_hint')->first();
 
         if ($check_email) {
-            return back()->with('reset_password_session', $check_email);
+            return back()->with('reset_password_check_session', $check_email);
         } else {
             return back()->withErrors(['error' => 'ไม่พบอีเมลล์ในระบบ กรุณาตรวจสอบอีกครั้งหรือติดต่อแอดมิน'])->onlyInput('email');
         }
     }
 
 
+    public function reset_password_check(Request $request, $id)
+    {
+        $credentials = $request->validate([
+            'forget_password_answer' => 'required|string|max:100'
+        ]);
+
+        $check_answer = User::where('forget_password_answer', $credentials['forget_password_answer'])->where('userID', $id)->first();
+
+        if ($check_answer) {
+            return back()->with('reset_password_session', $check_answer);
+        } else {
+            return back()->withErrors(['error' => 'คำตอบไม่ถูกต้อง กรุณากรอกใหม่อีกครั้งหรือติดต่อแอดมิน']);
+        }
+
+    }
+
+    
     public function reset_password_save(Request $request, $id)
     {
         $credentials = Validator::make($request->all(), [
-            'password' => ['required', 'confirmed', Password::min(8)->max(20)],
+            'password' => ['required', 'confirmed', Password::min(8)->max(20)]
         ]);
 
         if ($credentials->fails()) {
