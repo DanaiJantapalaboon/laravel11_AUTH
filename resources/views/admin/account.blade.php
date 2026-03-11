@@ -164,7 +164,9 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">แก้ไขรูปโปรไฟล์</h5>
-                        <form action="" enctype="multipart/form-data">
+                        <form action="change_avatar.submit" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PATCH')
                             <div class="row mb-2">
                                 <div class="col-md-4">
                                     <div class="position-relative">
@@ -174,11 +176,11 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="position-relative text-center">
-                                        <img width="180" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
+                                        <img width="180" class="rounded-circle" src="{{ asset('storage/'.Auth::user()->avatar) }}" alt="">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="submit_avatar" class="mt-2 btn btn-primary">บันทึก</button>
+                            <button type="submit" class="mt-2 btn btn-primary">บันทึก</button>
                         </form>
                     </div>
                 </div>
@@ -192,9 +194,9 @@
                 <button class="pure-modal-close" onclick="closeModal('emailModal')">&times;</button>
             </div>
             <form action="change_email.submit" method="POST">
+                @csrf
+                @method('PATCH')
                 <div class="pure-modal-body">
-                    @csrf
-                    @method('PATCH')
                     <label for="email_old" class="form-label">อีเมลล์เดิม</label>
                     <input type="email" id="email_old" value="{{ Auth::user()->email }}" class="form-control mb-3" readonly disabled>
                     <label for="email" class="form-label">อีเมลล์ใหม่ (ใช้สำหรับเข้าสู่ระบบ) <span class="text-danger"> *</span></label>

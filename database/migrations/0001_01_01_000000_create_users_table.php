@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('forget_password_question', 100)->nullable();
             $table->string('forget_password_answer', 100)->nullable();
             $table->string('forget_password_hint', 100)->nullable();

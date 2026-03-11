@@ -18,6 +18,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(MyAccountController::class)->group(function () {
     Route::patch('/change_info.submit', 'change_info_save');
     Route::patch('/change_email.submit', 'change_email_save');
+    Route::patch('/change_avatar.submit', 'change_avatar_save');
     Route::patch('/change_password.submit', 'change_password_save');
 });
 

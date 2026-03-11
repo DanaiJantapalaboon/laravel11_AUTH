@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
@@ -80,6 +81,26 @@ class MyAccountController extends Controller
         }
 
         return back()->with('success', 'เปลี่ยนอีเมลล์สำเร็จแล้ว');
+    }
+
+
+
+    public function change_avatar_save(Request $request)    // เพิ่ม validator failure
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
+        ]);
+
+        $user = Auth::user();
+
+        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $user->avatar = $request->file('avatar')->store('uploaded_img/avatars', 'public');
+        $user->save();
+
+        return back();
     }
 
 }
