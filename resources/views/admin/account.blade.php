@@ -171,7 +171,7 @@
                                 <div class="col-md-4">
                                     <div class="position-relative">
                                         <label for="avatar">คลิก "Choose File" เพื่อเลือกไฟล์รูปภาพที่ต้องการ <span class="text-danger"> *</span></label>
-                                        <input type="file" name="avatar" id="avatar" class="form-control-file" accept="image/*" required>
+                                        <input type="file" name="avatar" id="avatar" class="form-control-file" accept=".png, .jpg, .jpeg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-8">

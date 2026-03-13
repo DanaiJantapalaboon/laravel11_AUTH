@@ -41,7 +41,6 @@ class MyAccountController extends Controller
 
     public function change_password_save(Request $request): RedirectResponse
     {
-
         $validator = Validator::make($request->all(), [
             'current_password' => ['required', Password::min(8)->max(20)],
             'password' => ['required', 'confirmed', 'different:current_password', Password::min(8)->max(20)],
@@ -85,11 +84,15 @@ class MyAccountController extends Controller
 
 
 
-    public function change_avatar_save(Request $request)    // เพิ่ม validator failure
+    public function change_avatar_save(Request $request)
     {
-        $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
+        $validator = Validator::make($request->all(), [
+            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors(['error' => 'รูปภาพไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง, นามสกุลไฟล์ที่แนะนำ .jpeg .jpg .png ขนาดไม่เกิน 2 MB']);
+        }
 
         $user = Auth::user();
 
