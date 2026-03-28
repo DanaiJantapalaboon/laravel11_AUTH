@@ -33,7 +33,7 @@
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Menu</li>
-                <li class="mm-active">
+                <li>
                     <a href="#">
                         <i class="metismenu-icon lnr-database"></i>Dashboards
                         <i class="metismenu-state-icon lnr-chevron-down caret-left"></i>
@@ -67,7 +67,8 @@
                 <li class="app-sidebar__heading">ตั้งค่า</li>
                 <li>
                     <a href="widgets-chart-boxes.html"><i class="metismenu-icon lnr-cog"></i>ข้อมูลทั่วไป</a>
-                    <a href="widgets-chart-boxes.html" class="mm-active"><i class="metismenu-icon lnr-users"></i>ผู้ใช้งานระบบ</a>
+                    <a href="/user_management" class="{{ request()->is('user_management') ? 'mm-active' : '' }}"><i class="metismenu-icon lnr-users"></i>ผู้ใช้งานระบบ</a>
+                    <a href="/company" class="{{ request()->is('company') ? 'mm-active' : '' }}"><i class="metismenu-icon lnr-apartment"></i>ข้อมูลหน่วยงาน</a>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="metismenu-icon lnr-exit"></i>Logout</a>
                     <form action="/logout" method="POST" id="logout-form">
                         @csrf

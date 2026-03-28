@@ -40,7 +40,7 @@
                                 <div class="col-md-8">
                                     <div class="position-relative">
                                         <label for="address" class="form-label">ที่อยู่</label>
-                                        <input type="text" name="address" id="address" placeholder="..." class="form-control" maxlength="255">
+                                        <input type="text" name="address" id="address" placeholder="..." class="form-control" maxlength="200">
                                     </div>
                                 </div>
                             </div>
@@ -54,13 +54,13 @@
                                 <div class="col-md-4">
                                     <div class="position-relative">
                                         <label for="tel1" class="form-label">เบอร์โทรศัพท์ 1</label>
-                                        <input type="tel" name="tel1" id="tel1" placeholder="..." class="form-control" maxlength="10">
+                                        <input type="tel" name="tel1" id="tel1" placeholder="..." class="form-control" maxlength="20">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
                                         <label for="tel2" class="form-label">เบอร์โทรศัพท์ 2</label>
-                                        <input type="tel" name="tel2" id="tel2" placeholder="..." class="form-control" maxlength="10">
+                                        <input type="tel" name="tel2" id="tel2" placeholder="..." class="form-control" maxlength="20">
                                     </div>
                                 </div>
                             </div>
