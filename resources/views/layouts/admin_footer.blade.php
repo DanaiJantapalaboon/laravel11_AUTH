@@ -1,7 +1,7 @@
 <footer class="app-footer">
     <div class="app-footer__inner">
         <div class="app-footer-left">
-            <div class="text-muted ml-4">หน่วยงาน ่ฟาหสกด่สฟาห่กดาสฟห่กดส่ฟห่กดนรฟรหด</div>
+            <div class="text-muted ml-4">หน่วยงาน {{ $company_info->name }}</div>
         </div>
         <div class="app-footer-right">
             <ul class="header-megamenu nav">

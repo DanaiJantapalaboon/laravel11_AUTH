@@ -2,25 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class UserSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::create([
-            'name' => Str::random(15),
-            'position' => Str::random(20),
+        Company::create([
+            'name' => Str::random(30),
+            'tax' => rand(1000000000000, 9999999999999),
+            'address' => Str::random(100),
             'email' => 'admin01@admin',
-            'password' => Hash::make('12345678'),
+            'tel1' => '0897078209',
+            'tel2' => '0890000000'
         ]);
     }
 }

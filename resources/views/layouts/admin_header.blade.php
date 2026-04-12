@@ -35,7 +35,7 @@
                 <div class="app-header-left">
                     <ul class="header-megamenu nav">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">โปรแกรมบริหารจัดการฟหรกด่ฟหรนด่ Version 1.00</a>
+                            <a href="#" class="nav-link">โปรแกรม {{ $company_info->name }}</a>
                         </li>
                         <li class="nav-item">
                             <a href="javascript:void(0);" data-placement="bottom" rel="popover-focus" data-offset="300" data-toggle="popover-custom" class="nav-link">

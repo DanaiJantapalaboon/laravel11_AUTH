@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MyAccountController;
+use App\Http\Controllers\CompanyInfoController;
 use App\Http\Controllers\UserManagementController;
 
 
@@ -31,6 +32,10 @@ Route::controller(UserManagementController::class)->group(function () {
     Route::patch('/disabled_account.submit/{id}', 'user_disabled_save')->name('disabled_account.submit');
 });
 
+
+Route::controller(CompanyInfoController::class)->group(function () {
+    Route::patch('/update_companyInfo.submit', 'update_companyInfo_save');
+});
 
 
 

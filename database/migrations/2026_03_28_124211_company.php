@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tel1', 20)->nullable();
             $table->string('tel2', 20)->nullable();
             $table->string('logo')->nullable();
+            $table->timestamps();
         });
     }
 
