@@ -1,4 +1,4 @@
-<title>Account | Your Application</title>
+<title>Account | {{ $company_info->name }}</title>
 
 @extends('layouts.admin')
 

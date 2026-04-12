@@ -37,7 +37,7 @@
                 </div>
                 <div class="footer-wrapper p-4">
                     <div class="d-flex justify-content-between">
-                        <small class="text-white">Copyright © <script>document.write(new Date().getFullYear())</script> Your Company, All rights reserved.</small>
+                        <small class="text-white">Copyright © <script>document.write(new Date().getFullYear())</script> {{ $company_info->name2 }}, All rights reserved.</small>
                         <div class="d-flex">
                             <a href="" target="_blank"><i class="icon bi bi-facebook mx-3"></i></a>
                             <a href="" target="_blank"><i class="icon bi bi-line"></i></a>

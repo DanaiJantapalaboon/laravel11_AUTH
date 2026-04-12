@@ -1,4 +1,4 @@
-<title>ลืมรหัสผ่าน | Your Application</title>
+<title>ลืมรหัสผ่าน | {{ $company_info->name }}</title>
 
 @extends('layouts.auth')
 
@@ -7,7 +7,7 @@
         <form action="forgot_password.check" method="POST">
             @csrf
             <h2 class="text-center fw-semibold">ลืมรหัสผ่าน</h2>
-            <h6 class="text-center">โปรแกรม่าสฟห่ดสาฟหก่ดวสา</h6>
+            <h6 class="text-center">{{ $company_info->name }}</h6>
             <hr class="mb-5">
             <div class="d-flex justify-content-between">
                 <label for="email" class="form-label">กรุณากรอก Email Address ของท่านแล้วกดค้นหา <span style="color: red;">*</span></label>

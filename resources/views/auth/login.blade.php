@@ -1,4 +1,4 @@
-<title>Login | Your Application</title>
+<title>Login | {{ $company_info->name }}</title>
 
 @extends('layouts.auth')
 
@@ -7,7 +7,7 @@
         <form action="/authenticate" method="POST">
             @csrf
             <h2 class="text-center fw-semibold">เข้าสู่ระบบ</h2>
-            <h6 class="text-center">โปรแกรม่าสฟห่ดสาฟหก่ดวสา</h6>
+            <h6 class="text-center">{{ $company_info->name }}</h6>
             @session('success')
                 <p class="alert alert-success p-1 small text-center">{{ $value }}</p>
             @endsession

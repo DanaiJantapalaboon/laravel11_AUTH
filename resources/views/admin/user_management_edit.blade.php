@@ -1,4 +1,4 @@
-<title>User Management | Your Application</title>
+<title>User Management | {{ $company_info->name }}</title>
 
 @extends('layouts.admin')
 
@@ -38,7 +38,11 @@
                             @csrf
                             <div class="row mt-4">
                                 <div class="col-md-4 text-center">
-                                    <img width="180" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
+                                    @if ($user_edit->avatar)
+                                        <img width="180" class="rounded-circle" src="{{ asset('storage/'.$user_edit->avatar) }}" alt="">
+                                    @else
+                                        <img width="180" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
+                                    @endif
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
@@ -84,7 +88,7 @@
                         <div class="row mb-2">
                             <div class="col-md-4">
                                 <div class="position-relative">
-                                    <button type="button" class="btn btn-primary btn-secondary w-100">รีเซ็ตรหัสผ่าน</button>
+                                    <button type="button" class="btn btn-primary btn-secondary w-100" onclick="openModal2()">รีเซ็ตรหัสผ่าน</button>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +102,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="pure-modal" id="resetPasswordModal">
+        <div class="pure-modal-dialog">
+            <div class="pure-modal-header d-flex justify-content-between align-items-center bg-secondary">
+                <h5 class="pure-modal-title text-white">รีเซ็ตรหัสผ่าน</h5>
+                <button class="pure-modal-close text-white" onclick="closeModal('resetPasswordModal')">&times;</button>
+            </div>
+            {{-- <form action="{{ route('resetPassword_account.submit', $user_edit->userID) }}" method="POST"> --}}
+            <form action="" method="POST">
+                <div class="pure-modal-body">
+                    @method('PATCH')
+                    @csrf
+                    <label for="email" class="form-label">ท่านกำลังรีเซ็ตรหัสผ่านของผู้ใช้งานบัญชีนี้<br>โดยผู้ใช้สามารถกำหนดรหัสผ่านใหม่ได้ที่ปุ่ม "ล็อกอินครั้งแรก" ในหน้า Login</label>
+                    <input type="email" id="email" placeholder="..." class="form-control" value="{{ $user_edit->email }}" readonly disabled>
+                </div>
+                <div class="pure-modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModal('resetPasswordModal')">ยกเลิก</button>
+                    <button type="submit" class="btn btn-secondary">รีเซ็ตรหัสผ่าน</button>
+                </div>
+            </form>
         </div>
     </div>
     <div class="pure-modal" id="accountModal">
@@ -126,6 +151,9 @@
     function openModal() {
         // document.getElementById('edit_id').value = id;
         document.getElementById('accountModal').classList.add('active');
+    }
+    function openModal2() {
+        document.getElementById('resetPasswordModal').classList.add('active');
     }
     function closeModal(modalId) {
         document.getElementById(modalId).classList.remove('active');

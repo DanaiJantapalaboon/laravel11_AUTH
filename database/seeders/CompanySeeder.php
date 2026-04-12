@@ -17,6 +17,7 @@ class CompanySeeder extends Seeder
     {
         Company::create([
             'name' => Str::random(30),
+            'name2' => Str::random(30),
             'tax' => rand(1000000000000, 9999999999999),
             'address' => Str::random(100),
             'email' => 'admin01@admin',

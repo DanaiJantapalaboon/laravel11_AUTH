@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('company', function (Blueprint $table) {
             $table->increments('companyID');
             $table->string('name', 100);
-            $table->string('tax', 13);
-            $table->string('address', 200);
-            $table->string('email', 50);
+            $table->string('name2', 100);
+            $table->string('tax', 13)->nullable();
+            $table->string('address', 200)->nullable();
+            $table->string('email', 50)->nullable();
             $table->string('tel1', 20)->nullable();
             $table->string('tel2', 20)->nullable();
             $table->string('logo')->nullable();

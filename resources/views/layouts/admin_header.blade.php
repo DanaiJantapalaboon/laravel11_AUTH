@@ -35,7 +35,7 @@
                 <div class="app-header-left">
                     <ul class="header-megamenu nav">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">โปรแกรม {{ $company_info->name }}</a>
+                            <a href="#" class="nav-link">{{ $company_info->name }}</a>
                         </li>
                         <li class="nav-item">
                             <a href="javascript:void(0);" data-placement="bottom" rel="popover-focus" data-offset="300" data-toggle="popover-custom" class="nav-link">
@@ -479,7 +479,11 @@
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="{{ asset('storage/'.Auth::user()->avatar) }}" alt="">
+                                            @if (Auth::user()->avatar)
+                                                <img width="42" class="rounded-circle" src="{{ asset('storage/'.Auth::user()->avatar) }}" alt="">
+                                            @else
+                                                <img width="42" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
+                                            @endif
                                             <i class="lnr-chevron-down lnr-chevron-down-avatar ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">

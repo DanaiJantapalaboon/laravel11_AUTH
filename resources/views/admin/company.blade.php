@@ -1,4 +1,4 @@
-<title>Company | Your Application</title>
+<title>Company | {{ $company_info->name }}</title>
 
 @extends('layouts.admin')
 
@@ -27,14 +27,14 @@
                             <div class="row mb-3">
                                 <div class="col-md-8">
                                     <div class="position-relative">
-                                        <label for="name" class="form-label">ชื่อร้าน<span class="text-danger"> *</span></label>
+                                        <label for="name" class="form-label">ชื่อโปรแกรม<span class="text-danger"> *</span></label>
                                         <input type="text" name="name" id="name" placeholder="..." class="form-control" maxlength="100" value="{{ $company_info->name }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="tax" class="form-label">เลขประจำตัวผู้เสียภาษี 13 หลัก</label>
-                                        <input type="text" name="tax" id="tax" placeholder="..." class="form-control" maxlength="13" value="{{ $company_info->tax }}">
+                                        <label for="name2" class="form-label">ชื่อหน่วยงาน <span class="text-danger"> *</span></label>
+                                        <input type="text" name="name2" id="name2" placeholder="..." class="form-control" maxlength="100" value="{{ $company_info->name2 }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +43,12 @@
                                     <div class="position-relative">
                                         <label for="address" class="form-label">ที่อยู่</label>
                                         <input type="text" name="address" id="address" placeholder="..." class="form-control" maxlength="200" value="{{ $company_info->address }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="position-relative">
+                                        <label for="tax" class="form-label">เลขประจำตัวผู้เสียภาษี 13 หลัก</label>
+                                        <input type="text" name="tax" id="tax" placeholder="..." class="form-control" maxlength="13" value="{{ $company_info->tax }}">
                                     </div>
                                 </div>
                             </div>
