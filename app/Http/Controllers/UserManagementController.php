@@ -13,7 +13,7 @@ class UserManagementController extends Controller
     
 
     public function index() {
-        $users = User::select('userID', 'name', 'position', 'email', 'created_at')->get();
+        $users = User::select('userID', 'name', 'position', 'email', 'created_at', 'deleted_at')->withTrashed()->get();
         return view('admin.user_management', compact('users'));
     }
 
@@ -73,6 +73,16 @@ class UserManagementController extends Controller
         } else {
             return back()->withErrors(['error'=> 'ระงับบัญชีผู้ใช้ไม่สำเร็จ เนื่องจากกรอกอีเมลล์ผิด กรุณาตรวจสอบอีกครั้ง']);
         }
+    }
+
+    
+    public function resetPassword_save($id): RedirectResponse
+    {
+        $resetPassword_save = User::findOrFail($id);
+        $resetPassword_save->password = null;
+        $resetPassword_save->save();
+
+        return back()->with('success', 'รีเซ็ตรหัสผ่านสำเร็จแล้ว');
     }
 
 

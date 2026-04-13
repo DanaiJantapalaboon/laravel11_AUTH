@@ -93,6 +93,7 @@
                                                     <th scope="col">ตำแหน่ง</th>
                                                     <th scope="col">อีเมลล์</th>
                                                     <th class="dt-center" scope="col">วันที่สร้าง Account</th>
+                                                    <th class="dt-center" scope="col">สถานะ</th>
                                                     <th class="dt-center">Action</th>
                                                 </tr>
                                             </thead>
@@ -104,7 +105,16 @@
                                                     <td>{{ $user->position }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td class="dt-center">{{ $user->created_at }}</td>
-                                                    <td class="dt-center"><a href="{{ route('user_management_edit', $user->userID) }}" class="btn btn-sm btn-secondary">แก้ไข</a></td>
+                                                    @if ($user->trashed())
+                                                        <td class="dt-center text-danger">DISABLED</td>
+                                                    @else
+                                                        <td class="dt-center text-success">ACTIVE</td>
+                                                    @endif
+                                                    @if (Auth::user()->userID == $user->userID)
+                                                        <td class="dt-center">Your Account</td>
+                                                    @else
+                                                        <td class="dt-center"><a href="{{ route('user_management_edit', $user->userID) }}" class="btn btn-sm btn-secondary">แก้ไข</a></td>
+                                                    @endif
                                                 </tr>
                                                 @endforeach
                                             </tbody>

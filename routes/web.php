@@ -30,6 +30,7 @@ Route::controller(UserManagementController::class)->group(function () {
     Route::get('/user_management_edit/{id}', 'user_edit')->name('user_management_edit')->middleware('auth');
     Route::patch('/edit_account.submit/{id}', 'user_edit_save')->name('edit_account.submit');
     Route::patch('/disabled_account.submit/{id}', 'user_disabled_save')->name('disabled_account.submit');
+    Route::patch('/resetPassword_account.submit/{id}', 'resetPassword_save')->name('resetPassword_account.submit');
 });
 
 

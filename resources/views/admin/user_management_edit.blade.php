@@ -31,7 +31,11 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <h5 class="card-title text-primary">ข้อมูลส่วนตัว</h5>
-                            <h5 class="card-title text-success">Account Status : Active</h5>
+                            @if (is_null($user_edit->password))
+                                <h5 class="card-title text-danger">Password Status : Not Set</h5>
+                            @else
+                                <h5 class="card-title text-success">Password Status : Set</h5>
+                            @endif
                         </div>
                         <form action="{{ route('edit_account.submit', $user_edit->userID) }}" method="POST">
                             @method('PATCH')
@@ -79,7 +83,14 @@
                 </div>
                 <div class="main-card mb-3 card">
                     <div class="card-body">
-                        <h5 class="card-title text-danger">จัดการบัญชีผู้ใช้</h5>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title text-danger">จัดการบัญชีผู้ใช้</h5>
+                            @if ($user_edit->trashed())
+                                <h5 class="card-title text-danger">Account Status : DISABLED</h5>
+                            @else
+                                <h5 class="card-title text-success">Account Status : ACTIVE</h5>
+                            @endif
+                        </div>
                         <b>คำแนะนำ</b>
                         <p>
                             <span class="text-secondary">1. การรีเซ็ตรหัสผ่าน จะเป็นการล้างรหัสผ่านที่ตั้งค่าไว้ ผู้ใช้จะต้องกำหนดรหัสผ่านใหม่เสมือนกับการเริ่มใช้งานครั้งแรก</span><br>
@@ -88,14 +99,22 @@
                         <div class="row mb-2">
                             <div class="col-md-4">
                                 <div class="position-relative">
-                                    <button type="button" class="btn btn-primary btn-secondary w-100" onclick="openModal2()">รีเซ็ตรหัสผ่าน</button>
+                                    @if (is_null($user_edit->password))
+                                        <button type="button" class="btn btn-primary btn-secondary w-100" disabled>รีเซ็ตรหัสผ่าน</button>
+                                    @else
+                                        <button type="button" class="btn btn-primary btn-secondary w-100" onclick="openModal2()">รีเซ็ตรหัสผ่าน</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="position-relative">
-                                    <button type="button" class="btn btn-primary btn-danger w-100" onclick="openModal()">ระงับบัญชีผู้ใช้</button>
+                                    @if ($user_edit->trashed())
+                                        <button type="button" class="btn btn-primary btn-warning w-100" onclick="openModal3()">บัญชีนี้ถูกระงับ, คลิกเพื่อกู้คืนบัญชีผู้ใช้</button>
+                                    @else
+                                        <button type="button" class="btn btn-primary btn-danger w-100" onclick="openModal()">ระงับบัญชีผู้ใช้</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -110,11 +129,10 @@
                 <h5 class="pure-modal-title text-white">รีเซ็ตรหัสผ่าน</h5>
                 <button class="pure-modal-close text-white" onclick="closeModal('resetPasswordModal')">&times;</button>
             </div>
-            {{-- <form action="{{ route('resetPassword_account.submit', $user_edit->userID) }}" method="POST"> --}}
-            <form action="" method="POST">
+            <form action="{{ route('resetPassword_account.submit', $user_edit->userID) }}" method="POST">
+                @method('PATCH')
+                @csrf
                 <div class="pure-modal-body">
-                    @method('PATCH')
-                    @csrf
                     <label for="email" class="form-label">ท่านกำลังรีเซ็ตรหัสผ่านของผู้ใช้งานบัญชีนี้<br>โดยผู้ใช้สามารถกำหนดรหัสผ่านใหม่ได้ที่ปุ่ม "ล็อกอินครั้งแรก" ในหน้า Login</label>
                     <input type="email" id="email" placeholder="..." class="form-control" value="{{ $user_edit->email }}" readonly disabled>
                 </div>
