@@ -163,6 +163,26 @@
             </form>
         </div>
     </div>
+    <div class="pure-modal" id="recoverAccountModal">
+        <div class="pure-modal-dialog">
+            <div class="pure-modal-header d-flex justify-content-between align-items-center bg-warning">
+                <h5 class="pure-modal-title text-white">กู้คืนบัญชีผู้ใช้</h5>
+                <button class="pure-modal-close text-white" onclick="closeModal('recoverAccountModal')">&times;</button>
+            </div>
+            <form action="{{ route('recover_account.submit', $user_edit->userID) }}" method="POST">
+                <div class="pure-modal-body">
+                    @method('PATCH')
+                    @csrf
+                    <label for="email" class="form-label">ท่านกำลังกู้คืนบัญชีผู้ใช้นี้ จะสามารถกลับมาใช้งานได้อีกครั้ง</label>
+                    <input type="email" id="email" placeholder="..." class="form-control" value="{{ $user_edit->email }}" readonly disabled>
+                </div>
+                <div class="pure-modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" onclick="closeModal('recoverAccountModal')">ยกเลิก</button>
+                    <button type="submit" class="btn btn-warning">กู้คืนบัญชีผู้ใช้</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 <script>
@@ -172,6 +192,9 @@
     }
     function openModal2() {
         document.getElementById('resetPasswordModal').classList.add('active');
+    }
+    function openModal3() {
+        document.getElementById('recoverAccountModal').classList.add('active');
     }
     function closeModal(modalId) {
         document.getElementById(modalId).classList.remove('active');

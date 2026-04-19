@@ -42,6 +42,27 @@ class AuthController extends Controller
 
 
 
+    public function initialize_password_check(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:50'
+        ]);
+
+        $check_email = User::where('email', $request->input('email'))->select('email', 'password', 'userID')->first();
+
+        if ($check_email) {
+            if ($check_email['password'] != NULL) {
+                return back()->withErrors(['error' => 'อีเมลล์นี้มีการตั้งค่ารหัสผ่านอยู่แล้ว กรุณาคลิก "ลืมรหัสผ่าน" ที่หน้าล็อกอิน']);
+            } else {
+                return back()->with('reset_password_check_session', $check_email);
+            }
+        } else {
+            return back()->withErrors(['error' => 'ไม่พบอีเมลล์ในระบบ กรุณาตรวจสอบอีกครั้งหรือติดต่อแอดมิน']);
+        }
+    }
+
+
+
     public function forgot_password_check(Request $request)
     {
         $request->validate([
@@ -86,7 +107,7 @@ class AuthController extends Controller
         } else {
             $user_password_save = User::findOrFail($id);
             $user_password_save->update(['password' => Hash::make($request->password)]);
-            return redirect('/')->with('success', 'แก้ไขรหัสผ่านสำเร็จ ท่านสามารถเข้าสู่ระบบได้');
+            return redirect('/')->with('success', 'กำหนดรหัสผ่านสำเร็จ ท่านสามารถเข้าสู่ระบบได้');
         }
     }
 }

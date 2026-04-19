@@ -1,7 +1,7 @@
         <div class="app-header header-shadow bg-slick-carbon header-text-light">
             <div class="app-header__logo">
                 <div class="logo-src mx-auto">
-                    <img src="{{ asset('images/logo.png') }}" style="width: 60px; margin-top: -5px; margin-left: 20px;">
+                    <img src="{{ asset('storage/' . $company_info->logo) }}" style="width: 60px; margin-top: -5px; margin-left: 20px;">
                 </div>
                 <div class="header__pane ml-auto">
                     <div>

@@ -86,4 +86,11 @@ class UserManagementController extends Controller
     }
 
 
+    public function recoverAccount_save($id): RedirectResponse
+    {
+        User::withTrashed()->find($id)->restore();
+        return back()->with('success', 'กู้คืนบัญชีผู้ใช้สำเร็จแล้ว');
+    }
+
+
 }

@@ -80,18 +80,19 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title text-primary">แก้ไขรูปโลโก้</h5>
-                        <form action="" enctype="multipart/form-data">
+                        <form action="update_companyLogo.submit" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="row mb-2">
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="avatar">คลิก "Choose File" เพื่อเลือกไฟล์รูปภาพที่ต้องการ <span class="text-danger"> *</span></label>
-                                        <input type="file" name="avatar" id="avatar" class="form-control-file" accept="image/*" required>
+                                        <label for="logo">คลิก "Choose File" เพื่อเลือกไฟล์รูปภาพที่ต้องการ <span class="text-danger"> *</span></label>
+                                        <input type="file" name="logo" id="logo" class="form-control-file" accept=".png, .jpg, .jpeg" required>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="position-relative">
+                                    <div class="position-relative text-center">
+                                        <img width="180" src="{{ asset('storage/'.$company_info->logo) }}" alt="">
                                     </div>
                                 </div>
                             </div>

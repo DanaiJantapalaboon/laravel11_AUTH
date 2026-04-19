@@ -11,6 +11,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/authenticate', 'authenticate');
     Route::post('/logout', 'logout')->middleware('auth');
     Route::post('/forgot_password.check', 'forgot_password_check');
+    Route::post('/initialize_password.check', 'initialize_password_check');
     Route::patch('/submit_reset_password/{id}', 'reset_password_save')->name('submit_reset_password');
     Route::post('/submit_reset_password.check/{id}','reset_password_check')->name('submit_reset_password.check');
 });
@@ -29,6 +30,7 @@ Route::controller(UserManagementController::class)->group(function () {
     Route::get('/user_management', 'index')->name('user_management')->middleware('auth');
     Route::get('/user_management_edit/{id}', 'user_edit')->name('user_management_edit')->middleware('auth');
     Route::patch('/edit_account.submit/{id}', 'user_edit_save')->name('edit_account.submit');
+    Route::patch('/recover_account.submit/{id}', 'recoverAccount_save')->name('recover_account.submit');
     Route::patch('/disabled_account.submit/{id}', 'user_disabled_save')->name('disabled_account.submit');
     Route::patch('/resetPassword_account.submit/{id}', 'resetPassword_save')->name('resetPassword_account.submit');
 });
@@ -36,12 +38,14 @@ Route::controller(UserManagementController::class)->group(function () {
 
 Route::controller(CompanyInfoController::class)->group(function () {
     Route::patch('/update_companyInfo.submit', 'update_companyInfo_save');
+    Route::patch('/update_companyLogo.submit', 'update_companyLogo_save');
 });
 
 
 
 
 Route::get('/forgot_password', function () { return view('auth.forgot_password'); });
+Route::get('/account_initialize', function () { return view('auth.account_initialize'); });
 
 
 

@@ -113,7 +113,7 @@
                                                     @if (Auth::user()->userID == $user->userID)
                                                         <td class="dt-center">Your Account</td>
                                                     @else
-                                                        <td class="dt-center"><a href="{{ route('user_management_edit', $user->userID) }}" class="btn btn-sm btn-secondary">แก้ไข</a></td>
+                                                        <td class="dt-center"><a href="{{ route('user_management_edit', $user->userID) }}" class="btn btn-sm btn-outline-secondary">แก้ไข</a></td>
                                                     @endif
                                                 </tr>
                                                 @endforeach

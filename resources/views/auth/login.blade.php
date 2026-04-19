@@ -26,7 +26,7 @@
                     <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                     <label class="form-check-label small" for="rememberMe">จดจำฉันไว้</label>
                 </div> --}}
-                <small class="forgot-password"><a href="/forgot_password">ลืมรหัสผ่าน</a> | <a href="#">ล็อกอินครั้งแรก</a></small>
+                <small class="forgot-password"><a href="/forgot_password">ลืมรหัสผ่าน</a> | <a href="/account_initialize">ล็อกอินครั้งแรก</a></small>
             </div>
             <button type="submit" name="submitLogin" class="btn btn-submit w-100">เข้าสู่ระบบ</button>
         </form>
