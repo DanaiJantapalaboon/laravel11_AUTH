@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Settings_position;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -15,12 +16,16 @@ use Illuminate\Support\Facades\Validator;
 class MyAccountController extends Controller
 {
 
+    public function index() {
+        $positions = Settings_position::select('positionID', 'name')->get();
+        return view('admin.account', compact('positions'));
+    }
 
     public function change_info_save(Request $request)
     {
         $credentials = $request->validate([
             'name' => 'required|string|max:50',
-            'position' => 'required|string|max:50',
+            'positionID' => 'required|integer',
             'forget_password_hint' => 'required|string|max:100',
             'forget_password_answer' => 'required|string|max:100',
             'forget_password_question' => 'required|string|max:100'
@@ -28,7 +33,7 @@ class MyAccountController extends Controller
 
         $user = Auth::user();
         $user->name = $credentials['name'];
-        $user->position = $credentials['position'];
+        $user->positionID = $credentials['positionID'];
         $user->forget_password_hint = $credentials['forget_password_hint'];
         $user->forget_password_answer = $credentials['forget_password_answer'];
         $user->forget_password_question = $credentials['forget_password_question'];
@@ -96,11 +101,22 @@ class MyAccountController extends Controller
 
         $user = Auth::user();
 
-        if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
-            Storage::disk('public')->delete($user->avatar);
+        if ($user->avatar) {
+            $oldFile = public_path($user->avatar);
+
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
         }
 
-        $user->avatar = $request->file('avatar')->store('uploaded_img/avatars', 'public');
+        $file_avatar = time() . '_' . $request->file('avatar')->getClientOriginalName();         // Create unique filename
+        
+        $request->file('avatar')->move(                               // Move uploaded file
+            public_path('uploads/uploaded_img'),
+            $file_avatar
+        );
+
+        $user->avatar = 'uploads/uploaded_img/' . $file_avatar;
         $user->save();
 
         return back();

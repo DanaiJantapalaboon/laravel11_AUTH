@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Settings_position;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\QueryException;
@@ -13,8 +14,9 @@ class UserManagementController extends Controller
     
 
     public function index() {
-        $users = User::select('userID', 'name', 'position', 'email', 'created_at', 'deleted_at')->withTrashed()->get();
-        return view('admin.user_management', compact('users'));
+        $users = User::select('userID', 'name', 'positionID', 'email', 'created_at', 'deleted_at')->withTrashed()->get();
+        $positions = Settings_position::select('positionID', 'name')->get();
+        return view('admin.user_management', compact('users', 'positions'));
     }
 
 
@@ -24,7 +26,7 @@ class UserManagementController extends Controller
             $credentials = $request->validate([
                 'email' => 'required|email|max:50',
                 'name' => 'required|string|max:50',
-                'position' => 'required|string|max:50',
+                'positionID' => 'required|integer',
                 'password' => ['nullable', 'confirmed', Password::min(8)->max(20)]
             ]);
 
@@ -48,11 +50,11 @@ class UserManagementController extends Controller
     public function user_edit_save(Request $request, $id): RedirectResponse
     {
         $credentials = $request->validate([
-            'position' => 'required|string|max:50'
+            'positionID' => 'required|integer'
         ]);
 
        $user_edit_save = User::findOrFail($id);
-       $user_edit_save->position = $credentials['position'];
+       $user_edit_save->positionID = $credentials['positionID'];
        $user_edit_save->save();
 
        return back()->with('success', 'ปรับปรุงข้อมูลสำเร็จ');

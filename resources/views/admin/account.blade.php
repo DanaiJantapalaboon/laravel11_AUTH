@@ -2,7 +2,7 @@
 
 @extends('layouts.admin')
 
-@section('account-content')
+@section('admin-content')
     <div class="app-main__inner">
         <div class="app-page-title">
             <div class="page-title-wrapper">
@@ -83,13 +83,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="position" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
-                                        <select name="position" id="position" placeholder="..." class="form-control" required>
-                                            <option value="{{ Auth::user()->position }}" selected>{{ Auth::user()->position }}</option>
-                                            <option value="ตำแหน่ง 1">ตำแหน่ง 1</option>
-                                            <option value="ตำแหน่ง 2">ตำแหน่ง 2</option>
-                                            <option value="ตำแหน่ง 3">ตำแหน่ง 3</option>
-                                            <option value="ตำแหน่ง 4">ตำแหน่ง 4</option>
+                                        <label for="positionID" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
+                                        <select name="positionID" id="positionID" placeholder="..." class="form-control" required>
+                                            <option value="{{ Auth::user()->positionID }}" selected>{{ Auth::user()->position->name }}</option>
+                                                @foreach ($positions as $position)
+                                                    <option value="{{ $position->positionID }}">{{ $position->name }}</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -176,7 +175,11 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="position-relative text-center">
-                                        <img width="180" class="rounded-circle" src="{{ asset('storage/'.Auth::user()->avatar) }}" alt="">
+                                        @if (Auth::user()->avatar)
+                                            <img width="180" class="rounded-circle" src="{{ asset(Auth::user()->avatar) }}" alt="">
+                                        @else
+                                        <img width="180" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
+                                        @endif
                                     </div>
                                 </div>
                             </div>

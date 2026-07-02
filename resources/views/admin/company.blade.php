@@ -2,7 +2,7 @@
 
 @extends('layouts.admin')
 
-@section('company-content')
+@section('admin-content')
     <div class="app-main__inner">
         <div class="app-page-title">
             <div class="page-title-wrapper">
@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="position-relative text-center">
-                                        <img width="180" src="{{ asset('storage/'.$company_info->logo) }}" alt="">
+                                        <img width="180" src="{{ asset($company_info->logo) }}" alt="">
                                     </div>
                                 </div>
                             </div>

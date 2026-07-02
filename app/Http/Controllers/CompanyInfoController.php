@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Company;
 
 class CompanyInfoController extends Controller
 {
 
+    public function index() {
+        return view('admin.company');
+    }
 
     public function update_companyInfo_save(Request $request)
     {
@@ -49,13 +51,24 @@ class CompanyInfoController extends Controller
 
         $company = Company::find(1);
 
-        if ($company->logo && Storage::disk('public')->exists($company->logo)) {
-            Storage::disk('public')->delete($company->logo);
+        if ($company->logo) {
+            $oldFile = public_path($company->logo);
+
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
         }
 
-        $company->logo = $request->file('logo')->store('uploaded_img/logo', 'public');
+        $file_logo = time() . '_' . $request->file('logo')->getClientOriginalName();         // Create unique filename
+        
+        $request->file('logo')->move(                               // Move uploaded file
+            public_path('uploads/uploaded_img'),
+            $file_logo
+        );
+
+        $company->logo = 'uploads/uploaded_img/' . $file_logo;
         $company->save();
 
         return back();
+        }
     }
-}

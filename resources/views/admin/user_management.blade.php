@@ -2,7 +2,7 @@
 
 @extends('layouts.admin')
 
-@section('user_management-content')
+@section('admin-content')
     <div class="app-main__inner">
         <div class="app-page-title">
             <div class="page-title-wrapper">
@@ -45,13 +45,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="position-relative">
-                                        <label for="position" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
-                                        <select name="position" id="position" placeholder="..." class="form-control" required>
-                                            <option selected disabled>...</option>
-                                            <option value="1">ตำแหน่ง 1</option>
-                                            <option value="2">ตำแหน่ง 2</option>
-                                            <option value="3">ตำแหน่ง 3</option>
-                                            <option value="4">ตำแหน่ง 4</option>
+                                        <label for="positionID" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
+                                        <select name="positionID" id="positionID" placeholder="..." class="form-control" required>
+                                            <option value="" selected disabled>...</option>
+                                                @foreach ($positions as $position)
+                                                    <option value="{{ $position->positionID }}">{{ $position->name }}</option>
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -102,7 +101,7 @@
                                                 <tr>
                                                     <td class="text-center"></td>
                                                     <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->position }}</td>
+                                                    <td>{{ $user->position->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td class="dt-center">{{ $user->created_at }}</td>
                                                     @if ($user->trashed())

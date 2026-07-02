@@ -2,7 +2,7 @@
     --bg-menu: rgb(42, 69, 78);
     --bg-button: rgb(0, 156, 133);
     --bg-background: rgb(225, 225, 225);
-    --bg-input-hover: #C1F1FF;
+    --bg-input-hover: rgb(240, 233, 248);
     --bg-button-hover: rgb(1, 112, 95);
 }
 * {

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Settings_position;
+
 
 class User extends Authenticatable
 {
@@ -20,7 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'position',
+        'positionID',
         'password',
     ];
 
@@ -49,4 +51,10 @@ class User extends Authenticatable
 
     // custom primary_key for $id
     protected $primaryKey = 'userID';
+
+
+    public function position()
+    {
+        return $this->belongsTo(Settings_position::class, 'positionID', 'positionID');
+    }
 }

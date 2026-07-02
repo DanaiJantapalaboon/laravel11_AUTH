@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="{{ $company_info->logo }}">
         @vite('resources/css/admin.css')
         @vite('resources/css/admin-custom.css')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -26,10 +27,7 @@
         <div class="app-main">
             @include('layouts.admin_sidebar') 
             <div class="app-main__outer">
-                @yield('account-content')
-                @yield('company-content')
-                @yield('user_management-content')
-                @yield('user_management_edit-content')
+                @yield('admin-content')
                 <div class="app-wrapper-footer">
                     @include('layouts.admin_footer')
                 </div>

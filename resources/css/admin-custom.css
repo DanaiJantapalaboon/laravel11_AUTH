@@ -4,7 +4,7 @@
 .button-link {
     text-decoration: none !important;
 }
-input:hover {
+input:hover, select:hover {
     background-color: var(--bg-input-hover);
     transition: 0.5s;
 }
@@ -23,6 +23,7 @@ input:hover {
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     display: none;
+    z-index: 1050;
     align-items: center;
     justify-content: center;
 }
@@ -32,6 +33,7 @@ input:hover {
 .pure-modal-dialog {
     background: #fff;
     width: 100%;
+    z-index: 1051;
     max-width: 600px;
     border-radius: 8px;
     animation: modalFade 0.2s ease;

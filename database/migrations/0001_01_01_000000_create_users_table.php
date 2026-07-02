@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('userID');
             $table->string('name', 50);
-            $table->string('position', 50);
+            $table->unsignedTinyInteger('positionID');
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('forget_password_answer', 100)->nullable();
             $table->string('forget_password_hint', 100)->nullable();
             $table->unsignedTinyInteger('role')->default(0);
-            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

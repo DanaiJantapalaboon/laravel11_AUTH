@@ -1,7 +1,7 @@
         <div class="app-header header-shadow bg-slick-carbon header-text-light">
             <div class="app-header__logo">
-                <div class="logo-src mx-auto">
-                    <img src="{{ asset('storage/' . $company_info->logo) }}" style="width: 60px; margin-top: -5px; margin-left: 20px;">
+                <div class="logo-src w-100">
+                    <h5 class="text-white">GMC Web Admin</h5>
                 </div>
                 <div class="header__pane ml-auto">
                     <div>
@@ -480,7 +480,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
                                             @if (Auth::user()->avatar)
-                                                <img width="42" class="rounded-circle" src="{{ asset('storage/'.Auth::user()->avatar) }}" alt="">
+                                                <img width="42" class="rounded-circle" src="{{ asset(Auth::user()->avatar) }}" alt="">
                                             @else
                                                 <img width="42" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
                                             @endif
@@ -494,11 +494,15 @@
                                                         <div class="widget-content p-0">
                                                             <div class="widget-content-wrapper">
                                                                 <div class="widget-content-left mr-3">
-                                                                    <img width="42" class="rounded-circle" src="{{ asset('storage/'.Auth::user()->avatar) }}" alt="">
+                                                                    @if (Auth::user()->avatar)
+                                                                        <img width="42" class="rounded-circle" src="{{ asset(Auth::user()->avatar) }}" alt="">
+                                                                    @else
+                                                                        <img width="42" class="rounded-circle" src="{{ asset('images/my.webp') }}" alt="">
+                                                                    @endif
                                                                 </div>
                                                                 <div class="widget-content-left">
                                                                     <div class="widget-heading">{{ Auth::user()->name }}</div>
-                                                                    <div class="widget-subheading opacity-8">{{ Auth::user()->position }}</div>
+                                                                    <div class="widget-subheading opacity-8">{{ Auth::user()->position->name }}</div>
                                                                 </div>
                                                                 <div class="widget-content-right mr-2">
                                                                     <a href="#" class="btn-pill btn-shadow btn-shine btn btn-focus" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -573,7 +577,7 @@
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading"> {{ Auth::user()->name }} </div>
-                                    <div class="widget-subheading"> {{ Auth::user()->position }} </div>
+                                    <div class="widget-subheading"> {{ Auth::user()->position->name }} </div>
                                 </div>
                             </div>
                         </div>

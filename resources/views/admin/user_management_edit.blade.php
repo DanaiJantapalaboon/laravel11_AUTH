@@ -2,7 +2,7 @@
 
 @extends('layouts.admin')
 
-@section('user_management_edit-content')
+@section('admin-content')
     <div class="app-main__inner">
         <div class="app-page-title">
             <div class="page-title-wrapper">
@@ -60,12 +60,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="position" class="form-label">ตำแหน่ง <span class="text-danger"> *</span></label>
-                                            <select name="position" id="position" placeholder="..." class="form-control" required>
-                                                <option selected value="{{ $user_edit->position }}">{{ $user_edit->position }}</option>
-                                                <option value="ตำแหน่ง 1">ตำแหน่ง 1</option>
-                                                <option value="ตำแหน่ง 2">ตำแหน่ง 2</option>
-                                                <option value="ตำแหน่ง 3">ตำแหน่ง 3</option>
-                                                <option value="ตำแหน่ง 4">ตำแหน่ง 4</option>
+                                            <select name="positionID" id="positionID" placeholder="..." class="form-control" required>
+                                                <option value="{{ $user_edit->positionID }}" selected disabled>{{ $user_edit->position->name }}</option>
+                                                @php
+                                                    $positions = DB::table('settings_position')->select('positionID', 'name')->get();
+                                                @endphp
+                                                @foreach ($positions as $position)
+                                                    <option value="{{ $position->positionID }}">{{ $position->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6">
@@ -187,7 +189,6 @@
 
 <script>
     function openModal() {
-        // document.getElementById('edit_id').value = id;
         document.getElementById('accountModal').classList.add('active');
     }
     function openModal2() {
